@@ -1,7 +1,6 @@
 package org.example.authfilter.config;
 
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.RequiredArgsConstructor;
 import org.example.authfilter.annotation.Auth;
 import org.example.authfilter.dto.AuthUser;
 import org.springframework.core.MethodParameter;
@@ -11,12 +10,19 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-@RequiredArgsConstructor
 public class AuthUserArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.getParameterAnnotation(Auth.class) != null;
+        boolean hasAuthAnnotation = parameter.getParameterAnnotation(Auth.class) != null;
+        boolean isAuthUserType = parameter.getParameterType().equals(AuthUser.class);
+
+        // @Auth 어노테이션과 AuthUser 타입이 함께 사용되지 않은 경우 예외 발생
+        if (hasAuthAnnotation != isAuthUserType) {
+            throw new IllegalArgumentException("@Auth와 AuthUser 타입은 함께 사용되어야 합니다.");
+        }
+
+        return hasAuthAnnotation;
     }
 
     @Override

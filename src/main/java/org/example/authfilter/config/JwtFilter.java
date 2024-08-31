@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.util.regex.Pattern;
 
-@Slf4j
+@Slf4j(topic = "JwtFilter")
 @RequiredArgsConstructor
 public class JwtFilter implements Filter {
 
@@ -73,12 +73,6 @@ public class JwtFilter implements Filter {
         } catch (UnsupportedJwtException e) {
             log.error("Unsupported JWT token, 지원되지 않는 JWT 토큰 입니다.", e);
             httpResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, "지원되지 않는 JWT 토큰입니다.");
-        } catch (IllegalArgumentException e) {
-            log.error("JWT claims is empty, 잘못된 JWT 토큰 입니다.", e);
-            httpResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, "잘못된 JWT 토큰입니다.");
-        } catch (Exception e) {
-            log.error("JWT 토큰 검증 중 오류가 발생했습니다.", e);
-            httpResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "JWT 토큰 검증 중 오류가 발생했습니다.");
         }
     }
 
