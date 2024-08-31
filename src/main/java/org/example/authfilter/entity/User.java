@@ -15,4 +15,8 @@ public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String email;
+
+    public User(String email) {
+        this.email = email;
+    }
 }
