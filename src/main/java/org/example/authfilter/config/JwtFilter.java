@@ -59,6 +59,10 @@ public class JwtFilter implements Filter {
             // JWT 유효성 검사와 claims 추출
             Claims claims = jwtUtil.extractClaims(jwt);
 
+            // 사용자 정보를 ArgumentResolver 로 넘기기 위해 HttpServletRequest 에 세팅
+            httpRequest.setAttribute("userId", Long.parseLong(claims.getSubject()));
+            httpRequest.setAttribute("email", claims.get("email", String.class));
+
             chain.doFilter(request, response);
         } catch (SecurityException | MalformedJwtException e) {
             log.error("Invalid JWT signature, 유효하지 않는 JWT 서명 입니다.", e);
