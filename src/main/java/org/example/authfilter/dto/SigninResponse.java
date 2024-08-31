@@ -1,4 +1,4 @@
-package org.example.authfilter.dto.response;
+package org.example.authfilter.dto;
 
 import lombok.Getter;
 

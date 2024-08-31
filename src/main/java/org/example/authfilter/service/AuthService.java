@@ -2,10 +2,10 @@ package org.example.authfilter.service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.authfilter.config.JwtUtil;
-import org.example.authfilter.dto.request.SigninRequest;
-import org.example.authfilter.dto.request.SignupRequest;
-import org.example.authfilter.dto.response.SigninResponse;
-import org.example.authfilter.dto.response.SignupResponse;
+import org.example.authfilter.dto.SigninRequest;
+import org.example.authfilter.dto.SignupRequest;
+import org.example.authfilter.dto.SigninResponse;
+import org.example.authfilter.dto.SignupResponse;
 import org.example.authfilter.entity.User;
 import org.example.authfilter.repository.UserRepository;
 import org.springframework.stereotype.Service;
